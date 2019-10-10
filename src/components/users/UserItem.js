@@ -2,16 +2,16 @@ import React, { Component } from "react";
 
 class UserItem extends Component {
 	// para criar um estado para o componente
-	state = {
-		id: 1,
-		login: "mojombo",
-		avatar_url: "https://avatars0.githubusercontent.com/u/1?v=4",
-		html_url: "https://github.com/mojombo"
-	};
+	// state = {
+	// 	id: 1,
+	// 	login: "mojombo",
+	// 	avatar_url: "https://avatars0.githubusercontent.com/u/1?v=4",
+	// 	html_url: "https://github.com/mojombo"
+	// };
 
 	render() {
 		// Destructuring para retirar valores de um objeto
-		const { login, avatar_url, html_url } = this.state;
+		const { login, avatar_url, html_url } = this.props.user;
 
 		return (
 			<div className="card text-center">
