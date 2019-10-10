@@ -1,30 +1,29 @@
-import React, { Component } from 'react'
+import React from "react";
 // Proptypes serve para verificar o tipo de um atributo
 import PropTypes from "prop-types";
 
-export class Navbar extends Component {
-	// define um valor padrao para props, caso não seja passado um valor
-	static defaultProps = {
-		title: "Github Finder",
-		icon: "fa fa-github"
-	}
+// Destructuring para retirar valores de um objeto que espera receber
+const Navbar = ({ icon, title }) => {
+	return (
+		<nav className="navbar bg-primary">
+			<h1>
+				<i className={icon} />
+				{title}
+			</h1>
+		</nav>
+	);
+};
 
-	// para definir o tipo de dado que a prop espera receber e definir se é requerido ou nao
-	static propTypes = {
-		title: PropTypes.string.isRequired,
-		icon: PropTypes.string.isRequired
-	}
+// define um valor padrao para props, caso não seja passado um valor
+Navbar.defaultProps = {
+	title: "Github Finder",
+	icon: "fa fa-github"
+};
 
-  	render() {
-		return (
-			<nav className="navbar bg-primary">
-				<h1> 
-					<i className = { this.props.icon } />
-					{ this.props.title }
-				</h1>
-			</nav>
-		)
-  	}
-} 
+// para definir o tipo de dado que a prop espera receber e definir se é requerido ou nao
+Navbar.propTypes = {
+	title: PropTypes.string.isRequired,
+	icon: PropTypes.string.isRequired
+};
 
-export default Navbar
+export default Navbar;
