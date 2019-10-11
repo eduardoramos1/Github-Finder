@@ -1,9 +1,25 @@
 import React, { Component } from "react";
 import Navbar from "./components/layouts/Navbar.js";
 import Users from "./components/users/Users";
+import axios from "axios";
 import "./App.css";
 
 class App extends Component {
+	state = {
+		users: [],
+		loading: false
+	};
+
+	// Método de ciclo de vida. Executa quando a aplicação é criada
+	async componentDidMount() {
+		// O setState é usado para alterar as informações armazenadas dentro de "state"
+		this.setState({ loading: true });
+
+		const res = await axios.get("https://api.github.com/users");
+
+		this.setState({ users: res.data, loading: false });
+	}
+
 	render() {
 		return (
 			// O html gerado tem que estar envolvivido por um elemento Pai
@@ -15,7 +31,7 @@ class App extends Component {
 			<div className="App">
 				<Navbar title="Github Finder" icon="fa fa-github" />
 				<div className="container">
-					<Users />
+					<Users loading={this.state.loading} users={this.state.users} />
 				</div>
 			</div>
 		);
