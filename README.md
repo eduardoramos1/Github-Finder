@@ -2,20 +2,21 @@ Github Finder!
 
 ### `npm i`
 
+É necessário você criar duas variaveis de ambiente para este projeto. Primeiramente entre em : [https://github.com/settings/applications/new], insira um nome para aplicação, no campo "Homepage URL" e no campo "Authorization callback URL", digite :
 
+### `http://localhost:3000`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Depois disso pegue os valores de "Client ID" e "Cliente Secret".
+Agora vá até a pasta raiz da aplicação, crie um documento com o nome ".env.local" e dentro deste documento digite :
 
-## Available Scripts
+### `REACT_APP_GITHUB_CLIENT_ID='< O SEU CLIENT ID >'`
 
-In the project directory, you can run:
+### `REACT_APP_GITHUB_CLIENT_SECRET='< O SEU CLIENT SECRET > '`
+
+Para iniciar o servidor:
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Abra [http://localhost:3000] no seu browser
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
