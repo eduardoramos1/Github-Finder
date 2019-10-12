@@ -1,6 +1,7 @@
 import React from "react";
 // Proptypes serve para verificar o tipo de um atributo
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 // Destructuring para retirar valores de um objeto que espera receber
 const Navbar = ({ icon, title }) => {
@@ -10,6 +11,14 @@ const Navbar = ({ icon, title }) => {
 				<i className={icon} />
 				{title}
 			</h1>
+			<ul>
+				<li>
+					<Link to="/"> Inicio </Link>
+				</li>
+				<li>
+					<Link to="/sobre"> Sobre </Link>
+				</li>
+			</ul>
 		</nav>
 	);
 };
