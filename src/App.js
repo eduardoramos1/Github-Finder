@@ -33,7 +33,12 @@ class App extends Component {
 		this.setState({ users: res.data.items, loading: false });
 	};
 
+	clearUsers = () => {
+		this.setState({ users: [], loading: false });
+	};
+
 	render() {
+		const { users, loading } = this.state;
 		return (
 			// O html gerado tem que estar envolvivido por um elemento Pai
 			// React.Fragment é similar ao "template" de Vue, ou seja cria um elemento pai, porém esse elemento nao aparece na página final do projeto
@@ -41,11 +46,16 @@ class App extends Component {
 			// <React.Fragment>
 			// 	<h2 className="mb-2">Meu App</h2>
 			// </React.Fragment>
+
 			<div className="App">
 				<Navbar title="Github Finder" icon="fa fa-github" />
 				<div className="container">
-					<Search searchUsers={this.searchUsers} />
-					<Users loading={this.state.loading} users={this.state.users} />
+					<Search
+						searchUsers={this.searchUsers}
+						clearUsers={this.clearUsers}
+						showClear={users.length > 0 ? true : false}
+					/>
+					<Users loading={loading} users={users} />
 				</div>
 			</div>
 		);

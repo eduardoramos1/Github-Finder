@@ -8,7 +8,9 @@ export class Search extends Component {
 	};
 
 	static propTypes = {
-		searchUsers: PropTypes.func.isRequired
+		searchUsers: PropTypes.func.isRequired,
+		clearUsers: PropTypes.func.isRequired,
+		showClear: PropTypes.bool.isRequired
 	};
 
 	// [ev.target.name] pega o atributo name do input que está disparando o evento, no caso abaixo temos um input tipo text como name="text", ao usar esse macete, todo novo input que criar eu posso usar o mesmo metodo para setar o valor no state. para usar uma variável dentro de um objeto, é necessario envolver esta variavel entre colchetes ([])
@@ -21,6 +23,8 @@ export class Search extends Component {
 	};
 
 	render() {
+		const { showClear, clearUsers } = this.props;
+
 		return (
 			<div>
 				<form onSubmit={this.onSubmit} className="form">
@@ -37,6 +41,11 @@ export class Search extends Component {
 						className="btn btn-dark btn-block"
 					/>
 				</form>
+				{showClear && (
+					<button className="btn btn-light btn-block" onClick={clearUsers}>
+						Limpar
+					</button>
+				)}
 			</div>
 		);
 	}
