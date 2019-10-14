@@ -10,7 +10,7 @@
 
 `http://localhost:3000`
 
-Depois disso pegue os valores de "Client ID" e "Cliente Secret".
+Depois disso pegue os valores de "Client ID" e "Client Secret".
 Agora vá até a pasta raiz da aplicação, crie um documento com o nome ".env.local" e dentro deste documento digite :
 
 `REACT_APP_GITHUB_CLIENT_ID='< O SEU CLIENT ID >'`
