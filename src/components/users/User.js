@@ -1,19 +1,23 @@
 import React, { Component, Fragment } from "react";
 import Spinner from "../layouts/Spinner";
+import Repos from "../repos/Repos";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export class User extends Component {
 	componentDidMount() {
 		// Pegando Usuario da API, usando a função getUser definido em App.js
-		// .match.params pega um valor definir como parametro dentro uma url
+		// .match.params pega um valor definido como parametro dentro uma url
 		this.props.getUser(this.props.match.params.login);
+		this.props.getUserRepos(this.props.match.params.login);
 	}
 
 	static propTypes = {
 		loading: PropTypes.bool,
 		user: PropTypes.object.isRequired,
-		getUser: PropTypes.func.isRequired
+		getUser: PropTypes.func.isRequired,
+		getUserRepos: PropTypes.func.isRequired,
+		repos: PropTypes.array.isRequired
 	};
 
 	render() {
@@ -34,12 +38,12 @@ export class User extends Component {
 			hireable
 		} = this.props.user;
 
-		const { loading } = this.props;
+		const { loading, repos } = this.props;
 
 		if (loading) return Spinner;
 		return (
 			<Fragment>
-				<Link to="/" className="btn btn-light">
+				<Link to="/" className="btn btn-light sm-full-width my-1">
 					Voltar para a pesquisa
 				</Link>
 				Empregado :{" "}
@@ -128,6 +132,7 @@ export class User extends Component {
 						<strong>Gists:</strong> {public_gists}
 					</div>
 				</div>
+				<Repos repos={repos} />
 			</Fragment>
 		);
 	}

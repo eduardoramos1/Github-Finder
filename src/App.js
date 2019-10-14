@@ -14,7 +14,8 @@ class App extends Component {
 		users: [],
 		user: {},
 		loading: false,
-		alert: null
+		alert: null,
+		repos: []
 	};
 
 	// Método de ciclo de vida. Executa quando a aplicação é criada
@@ -49,8 +50,18 @@ class App extends Component {
 		this.setState({ loading: false, user: res.data });
 	};
 
+	// Pega os repositorios do usuario
+	getUserRepos = async username => {
+		this.setState({ loading: true });
+		const res = await axios.get(
+			`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+		);
+
+		this.setState({ loading: false, repos: res.data });
+	};
+
 	clearUsers = () => {
-		this.setState({ users: [], loading: false });
+		this.setState({ repos: [], loading: false });
 	};
 
 	setAlert = (msg, type) => {
@@ -60,7 +71,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { users, loading, user } = this.state;
+		const { users, loading, user, repos } = this.state;
 		return (
 			// O html gerado tem que estar envolvivido por um elemento Pai
 			// React.Fragment é similar ao "template" de Vue, ou seja cria um elemento pai, porém esse elemento nao aparece na página final do projeto
@@ -98,6 +109,8 @@ class App extends Component {
 										//  {...props} é passado para ter acesso a outras props, como match, history e location
 										{...props}
 										getUser={this.getUser}
+										getUserRepos={this.getUserRepos}
+										repos={repos}
 										user={user}
 										loading={loading}
 									/>
