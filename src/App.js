@@ -46,7 +46,7 @@ class App extends Component {
 			`https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
 		);
 
-		this.setState({ loading: true, user: res.data });
+		this.setState({ loading: false, user: res.data });
 	};
 
 	clearUsers = () => {
@@ -94,15 +94,13 @@ class App extends Component {
 								exact
 								path="/user/:login"
 								render={props => (
-									<Fragment>
-										<User
-											//  {...props} é passado para ter acesso a outras props, como match, history e location
-											{...props}
-											getUser={this.getUser}
-											user={user}
-											loading={loading}
-										/>
-									</Fragment>
+									<User
+										//  {...props} é passado para ter acesso a outras props, como match, history e location
+										{...props}
+										getUser={this.getUser}
+										user={user}
+										loading={loading}
+									/>
 								)}
 							/>
 						</Switch>
