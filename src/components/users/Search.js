@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const Search = ({ showClear, clearUsers, searchUsers, setAlert }) => {
+const Search = ({ showClear, clearUsers, searchUsers, showAlert }) => {
 	// Quando se tem um input com value preso a um valor de state, é necessário fazer uma chamada de evento onChange para poder digitar no input
 
 	//Criando state usando o useState, o primeiro valor é atributo que quer criar e o segundo um metodo para alterar o valor do atributo, as aspas invocadas como parametro no metodo useState representam o valor padrao de text
@@ -13,7 +13,7 @@ const Search = ({ showClear, clearUsers, searchUsers, setAlert }) => {
 	const onSubmit = ev => {
 		ev.preventDefault();
 		if (!text) {
-			setAlert("Por favor digite algo", "light");
+			showAlert("Por favor digite algo", "light");
 		} else {
 			searchUsers(text);
 			setText("");
@@ -49,7 +49,7 @@ Search.propTypes = {
 	searchUsers: PropTypes.func.isRequired,
 	clearUsers: PropTypes.func.isRequired,
 	showClear: PropTypes.bool.isRequired,
-	setAlert: PropTypes.func.isRequired
+	showAlert: PropTypes.func.isRequired
 };
 
 export default Search;
