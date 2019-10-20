@@ -16,7 +16,7 @@ Agora vá até a pasta raiz da aplicação, crie um documento com o nome ".env.l
 
 `REACT_APP_GITHUB_CLIENT_SECRET='< O SEU CLIENT SECRET >'`
 
-Para iniciar o servidor:
+## Para iniciar o servidor:
 
 `npm start`
 
