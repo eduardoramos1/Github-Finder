@@ -20,26 +20,38 @@ const App = () => {
 	const [alert, setAlert] = useState(null);
 	const [repos, setRepos] = useState([]);
 
+	let githubClientId;
+	let githubClientSecret;
+
+	if (process.env.NODE_ENV !== "production") {
+		githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+		githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+	} else {
+		githubClientId = process.env.GITHUB_CLIENT_ID;
+		githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+	}
 	// Para imitar "componentDidMount" em um componente funcional
 	useEffect(() => {
 		// definir uma função e a chamei logo em seguida para corrigir um aviso do useEffect, o useEffect só aceita que seja retornado uma função
+
 		async function fetchUsers() {
 			setLoading(true);
 
 			const res = await axios.get(
-				`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+				`https://api.github.com/users?client_id=${githubClientId}&client_secret=${githubClientSecret}`
 			);
 			setUsers(res.data);
 			setLoading(false);
 		}
 		fetchUsers();
+		// eslint-disable-next-line
 	}, []);
 
 	// Para pesquisar usuarios no github
 	const searchUsers = async text => {
 		setLoading(true);
 		const res = await axios.get(
-			`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+			`https://api.github.com/search/users?q=${text}&client_id=${githubClientId}&client_secret=${githubClientSecret}`
 		);
 
 		setUsers(res.data.items);
@@ -50,7 +62,7 @@ const App = () => {
 	const getUser = async username => {
 		setLoading(true);
 		const res = await axios.get(
-			`https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+			`https://api.github.com/users/${username}?client_id=${githubClientId}&client_secret=${githubClientSecret}`
 		);
 
 		setUser(res.data);
@@ -61,7 +73,7 @@ const App = () => {
 	const getUserRepos = async username => {
 		setLoading(true);
 		const res = await axios.get(
-			`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+			`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
 		);
 
 		setRepos(res.data);
